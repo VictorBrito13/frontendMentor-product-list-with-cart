@@ -1,34 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import Cart from './components/cart/Cart'
+import Dessert from './components/dessert/Dessert'
+import { IProduct } from './types/IProduct'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [products, setProducts] = useState<IProduct[]>([])
+
+  useEffect(() => {
+    fetch("./data.json")
+    .then(res => res.json())
+    .then(json => setProducts(json))
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className='container justify-content-center d-grid d-md-flex'>
+      {/* Desserts Container */}
+      <div className='flex-grow-1'>
+        <h1 className='f-red-hat-bold'>Desserts</h1>
+        {
+          products.length === 0 ?
+          <h2 className='bg-danger text-light p-2 rounded-3'>There is no products</h2>
+          :
+          <div className='products-container'>
+            {
+              products.map((p, index) => <Dessert key={index} image={p.image} name={p.name} category={p.category} price={p.price} />)
+            }
+          </div>
+        }
+        {/* List of desserts */}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      {/* Cart */}
+    </div>
   )
 }
 
