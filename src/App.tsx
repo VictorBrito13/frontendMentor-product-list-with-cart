@@ -18,7 +18,7 @@ function App() {
     <div className='container p-0 justify-content-center d-grid d-md-flex'>
       {/* Desserts Container */}
       <div className='flex-grow-1'>
-        <h1 className='f-red-hat-bold'>Desserts</h1>
+        <h1 className='f-red-hat-bold color-rose-900'>Desserts</h1>
         {
           products.length === 0 ?
           <h2 className='bg-danger text-light p-2 rounded-3'>There is no products</h2>
