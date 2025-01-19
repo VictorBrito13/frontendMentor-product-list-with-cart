@@ -55,7 +55,7 @@ export default function Dessert(prop: IProduct) {
               f-red-hat-semi-bold
               ${productSelected === false && 'color-red-hover'}
               color-rose-900
-              bg-rose-100
+              bg-rose-50
               border-red border-1
               p-2 w-75 rounded-pill
               position-absolute top-100 start-50 translate-middle
