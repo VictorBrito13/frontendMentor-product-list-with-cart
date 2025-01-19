@@ -15,7 +15,7 @@ function App() {
   }, [])
 
   return (
-    <div className='container p-0 justify-content-center d-grid d-md-flex'>
+    <div className='container p-4 justify-content-center d-grid d-md-flex'>
       {/* Desserts Container */}
       <div className='flex-grow-1'>
         <h1 className='f-red-hat-bold color-rose-900'>Desserts</h1>
