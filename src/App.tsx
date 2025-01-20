@@ -6,7 +6,10 @@ import { IProduct } from './types/IProduct'
 
 function App() {
 
+  // Available products
   const [products, setProducts] = useState<IProduct[]>([])
+  // Products in the cart
+  const [cartProcucts, setCartProducts] = useState<IProduct[]>([]);
 
   useEffect(() => {
     fetch("./data.json")
@@ -15,8 +18,9 @@ function App() {
   }, [])
 
   return (
-    <div className='container p-4 justify-content-center d-grid d-md-flex'>
+    <div className='container p-4 justify-content-center d-grid d-lg-flex'>
       {/* Desserts Container */}
+      {/* Show the available products */}
       <div className='flex-grow-1'>
         <h1 className='f-red-hat-bold color-rose-900'>Desserts</h1>
         {
@@ -25,14 +29,20 @@ function App() {
           :
           <div className='products-container'>
             {
-              products.map((p, index) => <Dessert key={index} image={p.image} name={p.name} category={p.category} price={p.price} />)
+              // Show available products
+              products.map((p, index) => {
+                const { image, name, category, price } = p
+                return (
+                  <Dessert key={index} setCartProducts={setCartProducts} product={{ image, name, category, price }} />
+                )
+              })
             }
           </div>
         }
         {/* List of desserts */}
       </div>
       {/* Cart */}
-      <Cart/>
+      <Cart products={cartProcucts} />
     </div>
   )
 }
