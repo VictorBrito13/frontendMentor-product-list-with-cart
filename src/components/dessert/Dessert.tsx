@@ -1,23 +1,37 @@
 import { useState } from 'react'
 import { IProduct } from '../../types/IProduct'
 
-export default function Dessert(prop: IProduct) {
+interface IComponentProps {
+  product: IProduct,
+  setCartProducts: Function
+}
 
-  const { image, name, category, price } = prop
+
+// This component needs the product and the function to add products
+export default function Dessert(props: IComponentProps) {
+
+  const { product, setCartProducts } = props
+
+  const { image, name, category, price } = product
   const { desktop, tablet, mobile } = image
   const [ productSelected, setProductSelected ] = useState(false)
   const [ productQuantity, setProductQuantity ] = useState(1)
 
   function addToCart() {
-
     if(productQuantity === 0) {
       setProductQuantity(1)
     }
+
+    // Push product to cart
+
     setProductSelected(true)
   }
 
   function incrementQuantity() {
     setProductQuantity(productQuantity+1)
+
+    // Search for the product, delete product, add the same product with the specified quantity
+
   }
 
   function decrementQuantity() {
@@ -30,6 +44,8 @@ export default function Dessert(prop: IProduct) {
       if(currentState === 0) {
         setProductSelected(false);
       }
+
+      // Search for the product, delete product, add the same product with the specified quantity
 
       return currentState;
     })
